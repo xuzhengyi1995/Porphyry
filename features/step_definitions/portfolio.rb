@@ -18,16 +18,30 @@ end
 
 Soit("{string} le portfolio spécifié dans la configuration") do |portfolio|
   case portfolio
-  when "vitraux" 
+  when "vitraux"
     true #current configuration
-  when "indéfini" 
+  when "indéfini"
     pending "alternate configuration"
   else
     false
   end
 end
 
-# Events 
+#conditions set an item's attributs
+Soit("le point de vue {string} rattaché à la page personelle") do |viewpoint|
+end
+
+Soit("le bouton {string} rattaché au point de vue {string}") do |button, viewpoint|
+end
+
+Soit("la page personnelle {string} spécifié dans la configuration") do |student|
+  #student name
+end
+
+Soit("le bouton {string} cliqué") do |button|
+  click_button(button)
+end
+# Events
 
 Quand("un visiteur ouvre la page d'accueil du site") do
   visit "/"
@@ -37,6 +51,23 @@ Quand("un visiteur ouvre la page d‘accueil d‘un site dont l‘adresse commen
   visit "/"
 end
 
+#Events set item's attributs
+
+Quand("un visiteur clique sur le bouton {string}") do |button|
+  click_button(button)
+end
+
+Quand("un visieur saisit {string} dans le champ de nom de l'attribut") do |attribut_name|
+  find(key).set(attribut_name)
+end
+
+Quand("il saisit {string} dans le champ de valeur de l'attribut ") do |attribut_value|
+  find(value).set(attribut_value)
+end
+
+Quand("il clique sur le bouton {string}") do |button|
+  click_button(button)
+end
 # Outcomes
 
 Alors("le titre affiché est {string}") do |portfolio|
@@ -44,10 +75,23 @@ Alors("le titre affiché est {string}") do |portfolio|
 end
 
 Alors("un des points de vue affichés est {string}") do |viewpoint|
-  expect(page).to have_content viewpoint
+  expect(page).to have_content(viewpoint)
 end
 
 Alors("un des corpus affichés est {string}") do |corpus|
-  expect(page).to have_content corpus
+  expect(page).to have_content(corpus)
 end
 
+#Outcomes set item
+Alors("un champ de nom de l'attribut est affiché")
+  expect(page).to have_field("key")
+end
+
+Alors("un champ de valeur de l'attribut est affiché")
+ expect(page).to have_field("value")
+end
+
+Alors("un nouvel attibut {string} applé {string} est enregistré") do |attKey,attValue|
+  expect(page).to have_content(attKey)
+  expect(page).to have_content(attValue)
+end
