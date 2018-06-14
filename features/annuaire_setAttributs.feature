@@ -11,8 +11,8 @@ Scénario: Créer un nouvel attribut
 
   Soit la page personnelle ETU spécifié dans la configuration
   Quand un visiteur clique sur le bouton "Ajouter"
-  Alors un champ de nom de l'attribut est affiché
-  Et un champ de valeur de l'attribut est affiché
+  Alors un champ de nom de l'attribut appelé "attribut_name" est affiché
+  Et un champ de valeur de l'attribut appelé "attribut_value" est affiché
 
 Scénario: Enregistrer le nouvel attribut
 
