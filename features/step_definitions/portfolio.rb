@@ -34,12 +34,12 @@ end
 Soit("le bouton {string} rattaché au point de vue {string}") do |button, viewpoint|
 end
 
-Soit("la page personnelle {string} spécifié dans la configuration") do |student|
-  #student name
+Soit("l'item {string} spécifié dans la configuration") do |item|
+  visit "http://localhost:3000/item/Vitraux%20-%20B%C3%A9nel/11d3601f5f400071f968da6e192ddb7e86f27286"
 end
 
 Soit("le bouton {string} cliqué") do |button|
-  click_button(button)
+  click_button button
 end
 # Events
 
@@ -57,12 +57,12 @@ Quand("un visiteur clique sur le bouton {string}") do |button|
   click_button button
 end
 
-Quand("un visieur saisit {string} dans le champ de nom de l'attribut") do |attribut_name|
-  find(key).set attribut_name
+Quand("un visiteur saisit {string} dans le champ de nom de l'attribut") do |attribut_name|
+  fill_in "key", with: attribut_name
 end
 
-Quand("il saisit {string} dans le champ de valeur de l'attribut ") do |attribut_value|
-  find(value).set attribut_value
+Quand("il saisit {string} dans le champ de valeur de l'attribut") do |attribut_value|
+  fill_in "value", with: attribut_value
 end
 
 Quand("il clique sur le bouton {string}") do |button|
@@ -84,7 +84,7 @@ end
 
 #Outcomes set item
 Alors("un champ de nom de l'attribut appelé {string} est affiché") do |attKey|
-  expect(page).to have_field attKey
+  page.all(:css, "a[id=attKey]").last()
 end
 
 Alors("un champ de valeur de l'attribut appelé {string} est affiché") do |attValue|
@@ -92,6 +92,5 @@ Alors("un champ de valeur de l'attribut appelé {string} est affiché") do |attV
 end
 
 Alors("un nouvel attibut {string} applé {string} est enregistré") do |attKey,attValue|
-  expect(page).to have_content attKey
-  expect(page).to have_content attValue
+  expect(page).to have_content "created"
 end
